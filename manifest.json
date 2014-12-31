@@ -1,0 +1,16 @@
+{
+  "appID": "9ece9b7d2d9d4d3aaf1cc4714da41c38",
+  "dependencies": {
+    "devkit-core": "https://github.com/gameclosure/devkit-core#v2.0.13",
+    "devkit-localnotify": "https://github.com/gameclosure/localnotify#v2.0.0"
+  },
+  "shortName": "demoLocalNotify",
+  "studio": {
+    "domain": "gameclosure.com",
+    "name": "GameClosure"
+  },
+  "supportedOrientations": [
+    "portrait"
+  ],
+  "title": "demoLocalNotify"
+}
