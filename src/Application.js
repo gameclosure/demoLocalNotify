@@ -39,8 +39,9 @@ exports = Class(GC.Application, function () {
     var radioWidth3 = (this.view.style.width - labelWidth - (padding * 5)) / 3;
     var buttonPadding = 25;
     var buttonWidth = (this.view.style.width - (buttonPadding * 3)) / 2;
-    var buttonHeight = 100;
-    var buttonsStartY = this.view.style.height - 500;
+    var buttonCount = 5;
+    var buttonHeight = (this.view.style.height / 3) / buttonCount;
+    var buttonsStartY = this.view.style.height - ((buttonHeight * 5) + (buttonPadding * buttonCount));
     var buttonsColumn2X = buttonWidth + (2 * buttonPadding);
     this.header = new TextView({
       superview: this.view,
@@ -213,22 +214,35 @@ exports = Class(GC.Application, function () {
     //   height: 44
     // });
 
+    // android only
     this.vibrateToggle = new ToggleView({
       superview: this.view,
       text: 'Vibrate (Android Only)',
       color: "black",
       x: buttonPadding,
       y: this.soundLabel.style.y + this.soundLabel.style.height + padding,
-      width: labelWidth * 2,
-      height: 44
+      width: labelWidth * 2 + buttonWidth,
+      height: 44,
+      visible: device.isAndroid
     });
 
 
+    this.requestPermissionsButton = new ButtonView({
+      superview: this.view,
+      x: buttonPadding,
+      y: buttonsStartY,
+      width: buttonWidth * 2 + buttonPadding,
+      height: buttonHeight,
+      title: "Request Permission (iOS 8+)",
+      onClick: bind(this, function () {
+        localNotify.requestNotificationPermission()
+      })
+    });
 
     this.scheduleNotificationButton1 = new ButtonView({
       superview: this.view,
       x: buttonPadding,
-      y: buttonsStartY,
+      y: this.requestPermissionsButton.style.y + buttonHeight + buttonPadding,
       width: buttonWidth,
       height: buttonHeight,
       title: "Schedule Notification 1",
@@ -240,7 +254,7 @@ exports = Class(GC.Application, function () {
     this.scheduleNotificationButton2 = new ButtonView({
       superview: this.view,
       x: buttonsColumn2X,
-      y: buttonsStartY,
+      y: this.scheduleNotificationButton1.style.y,
       width: buttonWidth,
       height: buttonHeight,
       title: "Schedule Notification 2",
@@ -252,7 +266,7 @@ exports = Class(GC.Application, function () {
     this.scheduleNotificationButton3 = new ButtonView({
       superview: this.view,
       x: buttonPadding,
-      y: buttonsStartY + buttonHeight + buttonPadding,
+      y: this.scheduleNotificationButton1.style.y + buttonHeight + buttonPadding,
       width: buttonWidth,
       height: buttonHeight,
       title: "Schedule Notification 3",
@@ -264,7 +278,7 @@ exports = Class(GC.Application, function () {
     this.scheduleNotificationButton4 = new ButtonView({
       superview: this.view,
       x: buttonsColumn2X,
-      y: buttonsStartY + buttonPadding + buttonHeight,
+      y: this.scheduleNotificationButton3.style.y,
       width: buttonWidth,
       height: buttonHeight,
       title: "Schedule Notification 4",
