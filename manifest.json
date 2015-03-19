@@ -1,8 +1,8 @@
 {
   "appID": "9ece9b7d2d9d4d3aaf1cc4714da41c38",
   "dependencies": {
-    "devkit-core": "https://github.com/gameclosure/devkit-core#v2.0.13",
-    "devkit-localnotify": "https://github.com/gameclosure/localnotify#v2.0.0"
+    "devkit-core": "https://github.com/gameclosure/devkit-core#v2.0.16",
+    "devkit-localnotify": "https://github.com/gameclosure/localnotify#v2.1.0"
   },
   "shortName": "demoLocalNotify",
   "studio": {
